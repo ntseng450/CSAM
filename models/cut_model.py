@@ -67,7 +67,7 @@ class CUTModel(BaseModel):
             self.visual_names += ['idt_B']
 
         if self.isTrain:
-            self.model_names = ['G', 'F', 'D']
+            self.model_names = ['G', 'F', 'D', 'A']
         else:  # during test time, only load G
             self.model_names = ['G']
 
@@ -90,6 +90,11 @@ class CUTModel(BaseModel):
             self.optimizer_D = torch.optim.Adam(self.netD.parameters(), lr=opt.lr, betas=(opt.beta1, opt.beta2))
             self.optimizers.append(self.optimizer_G)
             self.optimizers.append(self.optimizer_D)
+
+            # NSQUARED TIME
+            self.netA = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.normD, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
+            self.optimizer_A = torch.optim.Adam(self.netA.parameters(), lr=opt.lr, betas=(opt.beta1, opt.beta2))
+            self.optimizers.append(self.optimizer_A)
 
     def data_dependent_initialize(self, data):
         """
@@ -212,3 +217,37 @@ class CUTModel(BaseModel):
             total_nce_loss += loss.mean()
 
         return total_nce_loss / n_layers
+
+
+    # helper function returns corresponding attention map for each NCE layer from the discriminator]
+    def compute_A_loss(self):
+        """Attention Map Generation - Real A, Real B"""
+        pred_A = self.netD(self.real_A)
+        loss_D_A = self.criterionGAN(pred_A, True).mean()
+        pred_B = self.netD(self.real_B)
+        loss_D_B = self.criterionGAN(pred_B, True)
+        loss_D_B = loss_D_B.mean()
+
+        # combine loss and calculate gradients
+        self.loss_A = (loss_D_A + loss_D_B) * 0.5
+        return self.loss_A
+
+
+        """Attention Map Generation - Real A, Fake B"""
+        # fake = self.fake_B.detach()
+        # # Fake; stop backprop to the generator by detaching fake_B
+        # pred_fake = self.netD(fake)
+        # loss_D_fake = self.criterionGAN(pred_fake, False).mean()
+        # # Real A (Original Image)
+        # pred_real_A = self.netD(self.real_A)
+        # loss_D_real_A = self.criterionGAN(pred_real_A, True)
+        # loss_D_real_A = loss_D_real_A.mean()
+
+        # # combine loss and calculate gradients
+        # self.loss_A = (loss_D_fake + loss_D_real_A) * 0.5
+        # return self.loss_A
+
+
+    def get_attention_map(self, input):
+        at_maps = self.netD.attention_forward(input)
+        at_maps = at_maps.pow(2).mean(1)

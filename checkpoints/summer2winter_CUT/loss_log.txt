@@ -1,0 +1,84 @@
+================ Training Loss (Fri Mar 12 16:34:03 2021) ================
+(epoch: 1, iters: 100, time: 0.286, data: 7.028) G_GAN: 0.247 D_real: 0.270 D_fake: 0.196 G: 4.880 NCE: 4.635 NCE_Y: 4.631 
+================ Training Loss (Wed Mar 17 13:57:45 2021) ================
+================ Training Loss (Wed Mar 17 14:12:11 2021) ================
+================ Training Loss (Wed Mar 17 14:15:15 2021) ================
+================ Training Loss (Wed Mar 17 14:16:53 2021) ================
+================ Training Loss (Wed Mar 17 14:20:44 2021) ================
+================ Training Loss (Wed Mar 17 14:21:18 2021) ================
+================ Training Loss (Wed Mar 17 14:24:07 2021) ================
+================ Training Loss (Wed Mar 17 14:27:23 2021) ================
+================ Training Loss (Wed Mar 17 14:28:03 2021) ================
+================ Training Loss (Wed Mar 17 14:28:29 2021) ================
+================ Training Loss (Wed Mar 17 14:49:18 2021) ================
+================ Training Loss (Wed Mar 17 14:49:50 2021) ================
+================ Training Loss (Wed Mar 17 14:50:22 2021) ================
+================ Training Loss (Wed Mar 17 14:53:10 2021) ================
+================ Training Loss (Wed Mar 17 14:54:23 2021) ================
+================ Training Loss (Wed Mar 17 14:54:49 2021) ================
+================ Training Loss (Wed Mar 17 14:56:21 2021) ================
+================ Training Loss (Wed Mar 17 14:56:39 2021) ================
+================ Training Loss (Wed Mar 17 14:58:25 2021) ================
+================ Training Loss (Wed Mar 17 14:58:43 2021) ================
+================ Training Loss (Wed Mar 17 15:01:15 2021) ================
+(epoch: 1, iters: 100, time: 0.092, data: 0.038) D: 0.281 
+(epoch: 1, iters: 200, time: 0.083, data: 0.016) D: 0.373 
+(epoch: 1, iters: 300, time: 0.075, data: 0.019) D: 0.291 
+(epoch: 1, iters: 400, time: 0.068, data: 0.016) D: 0.262 
+(epoch: 1, iters: 500, time: 0.062, data: 0.016) D: 0.281 
+(epoch: 1, iters: 600, time: 0.056, data: 0.016) D: 0.327 
+(epoch: 1, iters: 700, time: 0.052, data: 0.031) D: 0.420 
+(epoch: 1, iters: 800, time: 0.047, data: 0.031) D: 0.268 
+(epoch: 1, iters: 900, time: 0.044, data: 0.031) D: 0.210 
+(epoch: 1, iters: 1000, time: 0.040, data: 0.027) D: 0.393 
+(epoch: 1, iters: 1100, time: 0.037, data: 0.026) D: 0.494 
+(epoch: 1, iters: 1200, time: 0.035, data: 0.020) D: 0.322 
+(epoch: 1, iters: 1300, time: 0.033, data: 0.031) D: 0.193 
+(epoch: 1, iters: 1400, time: 0.031, data: 0.031) D: 0.386 
+(epoch: 1, iters: 1500, time: 0.029, data: 0.016) D: 0.314 
+(epoch: 1, iters: 1600, time: 0.027, data: 0.016) D: 0.227 
+(epoch: 1, iters: 1700, time: 0.026, data: 0.025) D: 0.247 
+(epoch: 1, iters: 1800, time: 0.025, data: 0.024) D: 0.389 
+(epoch: 1, iters: 1900, time: 0.024, data: 0.016) D: 0.037 
+(epoch: 1, iters: 2000, time: 0.023, data: 0.026) D: 0.152 
+(epoch: 1, iters: 2100, time: 0.022, data: 0.005) D: 0.201 
+================ Training Loss (Wed Mar 17 15:03:50 2021) ================
+(epoch: 1, iters: 100, time: 0.092, data: 0.031) D: 0.312 
+(epoch: 1, iters: 200, time: 0.083, data: 0.016) D: 0.200 
+(epoch: 1, iters: 300, time: 0.075, data: 0.031) D: 0.331 
+(epoch: 1, iters: 400, time: 0.068, data: 0.016) D: 0.844 
+(epoch: 1, iters: 500, time: 0.062, data: 0.016) D: 0.264 
+(epoch: 1, iters: 600, time: 0.056, data: 0.016) D: 0.300 
+(epoch: 1, iters: 700, time: 0.052, data: 0.031) D: 0.478 
+(epoch: 1, iters: 800, time: 0.047, data: 0.031) D: 0.261 
+(epoch: 1, iters: 900, time: 0.044, data: 0.016) D: 0.259 
+(epoch: 1, iters: 1000, time: 0.040, data: 0.016) D: 0.577 
+(epoch: 1, iters: 1100, time: 0.037, data: 0.016) D: 0.193 
+(epoch: 1, iters: 1200, time: 0.035, data: 0.031) D: 0.305 
+(epoch: 1, iters: 1300, time: 0.032, data: 0.016) D: 0.051 
+(epoch: 1, iters: 1400, time: 0.030, data: 0.031) D: 0.612 
+(epoch: 1, iters: 1500, time: 0.029, data: 0.031) D: 0.216 
+(epoch: 1, iters: 1600, time: 0.027, data: 0.016) D: 0.257 
+(epoch: 1, iters: 1700, time: 0.026, data: 0.016) D: 0.213 
+(epoch: 1, iters: 1800, time: 0.024, data: 0.017) D: 0.344 
+(epoch: 1, iters: 1900, time: 0.023, data: 0.022) D: 0.260 
+(epoch: 1, iters: 2000, time: 0.022, data: 0.016) D: 0.204 
+(epoch: 1, iters: 2100, time: 0.022, data: 0.016) D: 0.281 
+(epoch: 2, iters: 8, time: 0.021, data: 0.016) D: 0.238 
+(epoch: 2, iters: 108, time: 0.020, data: 0.031) D: 0.435 
+(epoch: 2, iters: 208, time: 0.020, data: 0.016) D: 0.207 
+(epoch: 2, iters: 308, time: 0.019, data: 0.031) D: 0.359 
+(epoch: 2, iters: 408, time: 0.019, data: 0.028) D: 0.250 
+(epoch: 2, iters: 508, time: 0.018, data: 0.016) D: 0.752 
+(epoch: 2, iters: 608, time: 0.018, data: 0.016) D: 0.249 
+(epoch: 2, iters: 708, time: 0.018, data: 0.016) D: 0.302 
+(epoch: 2, iters: 808, time: 0.018, data: 0.031) D: 0.258 
+(epoch: 2, iters: 908, time: 0.017, data: 0.016) D: 0.037 
+(epoch: 2, iters: 1008, time: 0.017, data: 0.031) D: 0.255 
+(epoch: 2, iters: 1108, time: 0.017, data: 0.016) D: 0.194 
+(epoch: 2, iters: 1208, time: 0.017, data: 0.016) D: 0.214 
+(epoch: 2, iters: 1308, time: 0.017, data: 0.016) D: 0.346 
+(epoch: 2, iters: 1408, time: 0.017, data: 0.031) D: 0.144 
+================ Training Loss (Wed Mar 17 15:07:06 2021) ================
+(epoch: 1, iters: 100, time: 0.248, data: 3.710) G_GAN: 0.272 D_real: 0.346 D_fake: 0.174 G: 3.785 NCE: 3.450 NCE_Y: 3.577 
+(epoch: 1, iters: 200, time: 0.319, data: 0.001) G_GAN: 0.341 D_real: 0.248 D_fake: 0.237 G: 3.669 NCE: 3.424 NCE_Y: 3.232 

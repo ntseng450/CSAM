@@ -1333,8 +1333,17 @@ class NLayerDiscriminator(nn.Module):
         self.model = nn.Sequential(*sequence)
 
     def forward(self, input):
-        """Standard forward."""
+        """Standard forward."""    
         return self.model(input)
+
+    def attention_forward(self, input, nce_layers):
+        feat = input
+        feats = []
+        for layer_id, layer in enumerate(self.model):
+            feat = layer(feat)
+            if layer_id in layers:
+                feats.append(feat)
+        return feats
 
 
 class PixelDiscriminator(nn.Module):

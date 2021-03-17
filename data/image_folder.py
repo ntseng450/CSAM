@@ -58,7 +58,7 @@ class ImageFolder(data.Dataset):
         if self.transform is not None:
             img = self.transform(img)
         if self.return_paths:
-            return img, path
+            return {"img": img, "path": path}
         else:
             return img
 
