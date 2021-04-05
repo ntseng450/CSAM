@@ -1,35 +1,25 @@
-model [AttentionModel] was created
-create web directory ./checkpoints\summer2winter_CUT\web...
-2193
-2
-['trainA', 'trainB']
----------- Networks initialized -------------
-[Network D] Total number of parameters : 2.765 M
------------------------------------------------
-(epoch: 1, iters: 100, time: 0.092, data: 0.038) D: 0.281
-(epoch: 1, iters: 200, time: 0.083, data: 0.016) D: 0.373
-(epoch: 1, iters: 300, time: 0.075, data: 0.019) D: 0.291
-(epoch: 1, iters: 400, time: 0.068, data: 0.016) D: 0.262
-(epoch: 1, iters: 500, time: 0.062, data: 0.016) D: 0.281
-(epoch: 1, iters: 600, time: 0.056, data: 0.016) D: 0.327
-(epoch: 1, iters: 700, time: 0.052, data: 0.031) D: 0.420
-(epoch: 1, iters: 800, time: 0.047, data: 0.031) D: 0.268
-(epoch: 1, iters: 900, time: 0.044, data: 0.031) D: 0.210
-(epoch: 1, iters: 1000, time: 0.040, data: 0.027) D: 0.393
-(epoch: 1, iters: 1100, time: 0.037, data: 0.026) D: 0.494
-(epoch: 1, iters: 1200, time: 0.035, data: 0.020) D: 0.322
-(epoch: 1, iters: 1300, time: 0.033, data: 0.031) D: 0.193
-(epoch: 1, iters: 1400, time: 0.031, data: 0.031) D: 0.386
-(epoch: 1, iters: 1500, time: 0.029, data: 0.016) D: 0.314
-(epoch: 1, iters: 1600, time: 0.027, data: 0.016) D: 0.227
-(epoch: 1, iters: 1700, time: 0.026, data: 0.025) D: 0.247
-(epoch: 1, iters: 1800, time: 0.025, data: 0.024) D: 0.389
-(epoch: 1, iters: 1900, time: 0.024, data: 0.016) D: 0.037
-(epoch: 1, iters: 2000, time: 0.023, data: 0.026) D: 0.152
-(epoch: 1, iters: 2100, time: 0.022, data: 0.005) D: 0.201
-Traceback (most recent call last):
-  File "train_attention.py", line 56, in <module>
-    model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
-  File "C:\Users\ntseng\Documents\ROAHM\CSAM\models\attention_model.py", line 52, in optimize_parameters
-    self.loss_D += self.criterionLoss(self.output[i], self.image_classes[i]).mean()
-IndexError: index 1 is out of bounds for dimension 0 with size 1
+NLayerDiscriminator(
+  (model): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Downsample(
+      (pad): ReflectionPad2d([1, 1, 1, 1])
+    )
+    (3): Conv2d(64, 128, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1))
+    (4): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (5): LeakyReLU(negative_slope=0.2, inplace=True)
+    (6): Downsample(
+      (pad): ReflectionPad2d([1, 1, 1, 1])
+    )
+    (7): Conv2d(128, 256, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1))
+    (8): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (9): LeakyReLU(negative_slope=0.2, inplace=True)
+    (10): Downsample(
+      (pad): ReflectionPad2d([1, 1, 1, 1])
+    )
+    (11): Conv2d(256, 512, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1))
+    (12): InstanceNorm2d(512, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (13): LeakyReLU(negative_slope=0.2, inplace=True)
+    (14): Conv2d(512, 1, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1))
+  )
+)

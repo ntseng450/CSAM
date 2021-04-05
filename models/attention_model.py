@@ -22,6 +22,7 @@ class AttentionModel(BaseModel):
         self.visual_names = ['input', 'output']
         self.model_names = ['D']
         self.netD = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.normD, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
+        self.layers = [2, 6, 10, 14]
         if self.isTrain:
             self.criterionLoss = networks.GANLoss(opt.gan_mode).to(self.device)
             self.optimizer_D = torch.optim.Adam(self.netD.parameters(), lr=opt.lr, betas=(opt.beta1, opt.beta2))
@@ -53,3 +54,7 @@ class AttentionModel(BaseModel):
         self.loss_D /= self.opt.batch_size
         self.loss_D.backward()
         self.optimizer_D.step()        # update gradients for network G
+
+    def generate_attention(self):
+        "Return list of channel-wise squared mean feature maps"
+        feat_maps = self.netD.attention_forward(self.input_imgs, self.layers)

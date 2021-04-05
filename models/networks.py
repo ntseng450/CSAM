@@ -1336,7 +1336,7 @@ class NLayerDiscriminator(nn.Module):
         """Standard forward."""    
         return self.model(input)
 
-    def attention_forward(self, input, nce_layers):
+    def attention_forward(self, input, layers):
         feat = input
         feats = []
         for layer_id, layer in enumerate(self.model):
