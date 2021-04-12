@@ -52,6 +52,8 @@ if __name__ == '__main__':
                 model.setup(opt)               # regular setup: load and print networks; create schedulers
                 model.parallelize()
 
+            print(data)
+            print(data[0].shape)
             model.set_input(data)  # unpack data from dataset and apply preprocessing
             model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
             if len(opt.gpu_ids) > 0:

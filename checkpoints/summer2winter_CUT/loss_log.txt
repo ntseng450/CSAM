@@ -22007,3 +22007,4 @@
 (epoch: 1000, iters: 1992, time: 0.012, data: 0.011) D: 0.001 
 (epoch: 1000, iters: 2092, time: 0.012, data: 0.011) D: 0.001 
 (epoch: 1000, iters: 2192, time: 0.012, data: 0.011) D: 0.001 
+================ Training Loss (Mon Apr 12 14:46:01 2021) ================
