@@ -34,6 +34,8 @@ if __name__ == '__main__':
     if hasattr(state_dict, '_metadata'):
         del state_dict._metadata
     attention_model.netD.load_state_dict(state_dict)
+
+    attention_model.layers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     attention_model.input_imgs = transform(img).unsqueeze(0).cuda()
 
 
