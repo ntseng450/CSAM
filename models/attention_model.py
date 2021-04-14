@@ -58,3 +58,4 @@ class AttentionModel(BaseModel):
     def generate_attention(self):
         "Return list of channel-wise squared mean feature maps"
         feat_maps = self.netD.attention_forward(self.input_imgs, self.layers)
+        return feat_maps

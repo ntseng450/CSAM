@@ -75,9 +75,25 @@ stylegan2_G_num_downsampling: 1
                   verbose: False                         
 ----------------- End -------------------
 
-
-
+torch.Size([1, 128, 128])
+torch.Size([128, 128])
 Traceback (most recent call last):
-  File "visualize_attention.py", line 19, in <module>
-    preprocessed = T.compose([T.resize(256),
-AttributeError: module 'torchvision.transforms' has no attribute 'compose'
+  File "visualize_attention.py", line 50, in <module>
+    plt.imshow(image_map, interpolation='bicubic')
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\pyplot.py", line 2684, in imshow
+    None else {}), **kwargs)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\__init__.py", line 1599, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\deprecation.py", line 369, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\deprecation.py", line 369, in wrapper
+    return func(*args, **kwargs)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\axes\_axes.py", line 5679, in imshow
+    im.set_data(X)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\image.py", line 680, in set_data
+    self._A = cbook.safe_masked_invalid(A, copy=True)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\__init__.py", line 795, in safe_masked_invalid
+    x = np.array(x, subok=True, copy=copy)
+  File "D:\Anaconda3\envs\pytorch\lib\site-packages\torch\tensor.py", line 480, in __array__
+    return self.numpy()
+TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.

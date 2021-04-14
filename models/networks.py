@@ -1342,7 +1342,8 @@ class NLayerDiscriminator(nn.Module):
         for layer_id, layer in enumerate(self.model):
             feat = layer(feat)
             if layer_id in layers:
-                feats.append(feat)
+                return_feat = feat.pow(2).mean(1)
+                feats.append(return_feat)
         return feats
 
 
