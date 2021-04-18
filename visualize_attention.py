@@ -14,7 +14,9 @@ from data.base_dataset import get_transform
 
 if __name__ == '__main__':
     load_path = "checkpoints/summer2winter_CUT/latest_net_D.pth"
-    img_path = "datasets/s2wy_test/testA/2010-09-07 12_23_20.jpg"
+    # img_path = "datasets/s2wy_test/testA/2010-09-07 12_23_20.jpg"
+    img_path = "datasets/s2wy_test/testA/2012-07-08 16_40_31.jpg"
+    # img_path = "datasets/s2wy_test/testB/2010-11-01 15_58_51.jpg"
     with torch.cuda.device(0):
         img = Image.open(img_path)
     # plt.imshow(img)
@@ -49,7 +51,7 @@ if __name__ == '__main__':
         image_map = torch.squeeze(image_map)
         print(image_map.shape)
         plt.imshow(image_map.cpu(), interpolation='bicubic')
-        plt.savefig("visualize_am/attention_map_" + str(counter) + ".png")
+        plt.savefig("visualize_am2/attention_map_" + str(counter) + ".png")
         counter += 1
     
         

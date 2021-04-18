@@ -21,7 +21,10 @@ class AttentionModel(BaseModel):
         self.loss_names = ['D']
         self.visual_names = ['input', 'output']
         self.model_names = ['D']
-        self.netD = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.normD, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
+        # self.netD = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.normD, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
+        self.netD = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.normG, not opt.no_dropout,
+                                      opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids,
+                                      opt)
         self.layers = [2, 6, 10, 14]
         if self.isTrain:
             self.criterionLoss = networks.GANLoss(opt.gan_mode).to(self.device)
@@ -57,5 +60,6 @@ class AttentionModel(BaseModel):
 
     def generate_attention(self):
         "Return list of channel-wise squared mean feature maps"
-        feat_maps = self.netD.attention_forward(self.input_imgs, self.layers)
+        # feat_maps = self.netD.attention_forward(self.input_imgs, self.layers)
+        feat_maps = self.netG(self.input_imgs, self.layers, encode_only=True)
         return feat_maps

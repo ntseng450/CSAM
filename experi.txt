@@ -77,23 +77,78 @@ stylegan2_G_num_downsampling: 1
 
 torch.Size([1, 128, 128])
 torch.Size([128, 128])
-Traceback (most recent call last):
-  File "visualize_attention.py", line 50, in <module>
-    plt.imshow(image_map, interpolation='bicubic')
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\pyplot.py", line 2684, in imshow
-    None else {}), **kwargs)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\__init__.py", line 1599, in inner
-    return func(ax, *map(sanitize_sequence, args), **kwargs)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\deprecation.py", line 369, in wrapper
-    return func(*args, **kwargs)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\deprecation.py", line 369, in wrapper
-    return func(*args, **kwargs)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\axes\_axes.py", line 5679, in imshow
-    im.set_data(X)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\image.py", line 680, in set_data
-    self._A = cbook.safe_masked_invalid(A, copy=True)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\matplotlib\cbook\__init__.py", line 795, in safe_masked_invalid
-    x = np.array(x, subok=True, copy=copy)
-  File "D:\Anaconda3\envs\pytorch\lib\site-packages\torch\tensor.py", line 480, in __array__
-    return self.numpy()
-TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
+
+0 ReflectionPad2d((3, 3, 3, 3))
+1 Conv2d(3, 64, kernel_size=(7, 7), stride=(1, 1))
+2 InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+3 ReLU(inplace=True)
+4 Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+5 InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+6 ReLU(inplace=True)
+7 Downsample(
+  (pad): ReflectionPad2d([1, 1, 1, 1])
+)
+8 Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+9 InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+10 ReLU(inplace=True)
+11 Downsample(
+  (pad): ReflectionPad2d([1, 1, 1, 1])
+)
+12 ResnetBlock(
+  (conv_block): Sequential(
+    (0): ReflectionPad2d((1, 1, 1, 1))
+    (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (2): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace=True)
+    (4): ReflectionPad2d((1, 1, 1, 1))
+    (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (6): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  )
+)
+13 ResnetBlock(
+  (conv_block): Sequential(
+    (0): ReflectionPad2d((1, 1, 1, 1))
+    (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (2): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace=True)
+    (4): ReflectionPad2d((1, 1, 1, 1))
+    (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (6): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  )
+)
+14 ResnetBlock(
+  (conv_block): Sequential(
+    (0): ReflectionPad2d((1, 1, 1, 1))
+    (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (2): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace=True)
+    (4): ReflectionPad2d((1, 1, 1, 1))
+    (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (6): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  )
+)
+15 ResnetBlock(
+  (conv_block): Sequential(
+    (0): ReflectionPad2d((1, 1, 1, 1))
+    (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (2): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace=True)
+    (4): ReflectionPad2d((1, 1, 1, 1))
+    (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (6): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  )
+)
+16 ResnetBlock(
+  (conv_block): Sequential(
+    (0): ReflectionPad2d((1, 1, 1, 1))
+    (1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (2): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+    (3): ReLU(inplace=True)
+    (4): ReflectionPad2d((1, 1, 1, 1))
+    (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1))
+    (6): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=False, track_running_stats=False)
+  )
+)
+
+
+layer 16 output shape :  torch.Size([1, 256, 64, 64])

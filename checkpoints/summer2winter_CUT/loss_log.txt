@@ -22008,3 +22008,22 @@
 (epoch: 1000, iters: 2092, time: 0.012, data: 0.011) D: 0.001 
 (epoch: 1000, iters: 2192, time: 0.012, data: 0.011) D: 0.001 
 ================ Training Loss (Mon Apr 12 14:46:01 2021) ================
+================ Training Loss (Sat Apr 17 23:15:54 2021) ================
+================ Training Loss (Sat Apr 17 23:16:48 2021) ================
+================ Training Loss (Sat Apr 17 23:20:58 2021) ================
+================ Training Loss (Sat Apr 17 23:24:01 2021) ================
+================ Training Loss (Sun Apr 18 12:23:08 2021) ================
+================ Training Loss (Sun Apr 18 12:42:50 2021) ================
+(epoch: 1, iters: 100, time: 0.098, data: 0.034) D: 0.195 
+(epoch: 1, iters: 200, time: 0.094, data: 0.045) D: 0.273 
+(epoch: 1, iters: 300, time: 0.091, data: 0.025) D: 0.339 
+(epoch: 1, iters: 400, time: 0.088, data: 0.031) D: 0.257 
+(epoch: 1, iters: 500, time: 0.085, data: 0.019) D: 0.196 
+(epoch: 1, iters: 600, time: 0.083, data: 0.016) D: 0.266 
+(epoch: 1, iters: 700, time: 0.081, data: 0.027) D: 0.187 
+(epoch: 1, iters: 800, time: 0.079, data: 0.031) D: 0.404 
+(epoch: 1, iters: 900, time: 0.078, data: 0.029) D: 0.097 
+(epoch: 1, iters: 1000, time: 0.076, data: 0.041) D: 0.233 
+(epoch: 1, iters: 1100, time: 0.075, data: 0.022) D: 0.247 
+(epoch: 1, iters: 1200, time: 0.074, data: 0.016) D: 0.303 
+(epoch: 1, iters: 1300, time: 0.073, data: 0.023) D: 0.185 
