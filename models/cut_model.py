@@ -92,9 +92,14 @@ class CUTModel(BaseModel):
             self.optimizers.append(self.optimizer_D)
 
             # NSQUARED TIME
-            self.netA = networks.define_D(opt.output_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.normD, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
-            self.optimizer_A = torch.optim.Adam(self.netA.parameters(), lr=opt.lr, betas=(opt.beta1, opt.beta2))
-            self.optimizers.append(self.optimizer_A)
+            self.netA = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.normG, not opt.no_dropout,
+                        opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids, opt)
+            # change to opt.load_path
+            state_dict = torch.load("load_path", map_location=str(self.device))
+            if hasattr(state_dict, '_metadata'):
+                del state_dict._metadata
+            self.netA.load_state_dict(state_dict)
+            self.netA.eval()
 
     def data_dependent_initialize(self, data):
         """
@@ -210,11 +215,23 @@ class CUTModel(BaseModel):
         feat_k = self.netG(src, self.nce_layers, encode_only=True)
         feat_k_pool, sample_ids = self.netF(feat_k, self.opt.num_patches, None)
         feat_q_pool, _ = self.netF(feat_q, self.opt.num_patches, sample_ids)
+        
+        # Add attention weighting
+        with torch.no_grad():
+            # attention_output = self.netA(src, self.nce_layers, encode_only=True)
+            feat_a_pool = []
+            # for at_id, at_map in enumerate(attention_output):
+            #     at_map = at_map.permute(0, 2, 3, 1).flatten(1, 2)
+            #     patch_indices = sample_ids[at_id]
+            #     at_weights = at_map[:, patch_indices, :].flatten(0, 1)
+            #     feat_a_pool.append(at_weights) 
+            for feat in feat_q_pool:
+                feat_a_pool.append(feat[:, 0])
 
         total_nce_loss = 0.0
-        for f_q, f_k, crit, nce_layer in zip(feat_q_pool, feat_k_pool, self.criterionNCE, self.nce_layers):
-            loss = crit(f_q, f_k) * self.opt.lambda_NCE
-            total_nce_loss += loss.mean()
+        for f_q, f_k, f_a, crit, nce_layer in zip(feat_q_pool, feat_k_pool, feat_a_pool, self.criterionNCE, self.nce_layers):
+            loss = crit(f_q, f_k, f_a) * self.opt.lambda_NCE
+            total_nce_loss += loss
 
         return total_nce_loss / n_layers
 

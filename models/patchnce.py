@@ -7,10 +7,11 @@ class PatchNCELoss(nn.Module):
     def __init__(self, opt):
         super().__init__()
         self.opt = opt
-        self.cross_entropy_loss = torch.nn.CrossEntropyLoss(reduction='none')
+        # self.cross_entropy_loss = torch.nn.CrossEntropyLoss(reduction='none')
+        self.cross_entropy_loss = None
         self.mask_dtype = torch.uint8 if version.parse(torch.__version__) < version.parse('1.2.0') else torch.bool
 
-    def forward(self, feat_q, feat_k):
+    def forward(self, feat_q, feat_k, feat_a):
         batchSize = feat_q.shape[0]
         dim = feat_q.shape[1]
         feat_k = feat_k.detach()
@@ -18,7 +19,6 @@ class PatchNCELoss(nn.Module):
         # pos logit
         l_pos = torch.bmm(feat_q.view(batchSize, 1, -1), feat_k.view(batchSize, -1, 1))
         l_pos = l_pos.view(batchSize, 1)
-
         # neg logit
 
         # Should the negatives from the other samples of a minibatch be utilized?
@@ -42,13 +42,25 @@ class PatchNCELoss(nn.Module):
 
         # diagonal entries are similarity between same features, and hence meaningless.
         # just fill the diagonal with very small number, which is exp(-10) and almost zero
-        diagonal = torch.eye(npatches, device=feat_q.device, dtype=self.mask_dtype)[None, :, :]
-        l_neg_curbatch.masked_fill_(diagonal, -10.0)
+        # diagonal = torch.eye(npatches, device=feat_q.device, dtype=self.mask_dtype)[None, :, :]
+        # l_neg_curbatch.masked_fill_(diagonal, -10.0)
         l_neg = l_neg_curbatch.view(-1, npatches)
+        # print(l_neg_curbatch.shape)
+        # print("featq: ", feat_q.shape)
+        # print("featk: ", feat_k.shape)
+        # print(l_neg.shape)
+        # print(l_pos.shape)
+        # out = torch.cat((l_pos, l_neg), dim=1) / self.opt.nce_T
+        out = l_neg / self.opt.nce_T
+        # print(l_pos)
+        # print(l_neg[:, 0])
 
-        out = torch.cat((l_pos, l_neg), dim=1) / self.opt.nce_T
+        # print(out[0, :])
+        # print(torch.sum(out[0, :]))
+        
+        self.cross_entropy_loss = torch.nn.CrossEntropyLoss(weight=feat_a.detach())
+        loss = self.cross_entropy_loss(l_neg, torch.arange(npatches, dtype=torch.long, device=feat_q.device))
 
-        loss = self.cross_entropy_loss(out, torch.zeros(out.size(0), dtype=torch.long,
-                                                        device=feat_q.device))
+        # loss = self.cross_entropy_loss(out, torch.zeros(out.size(0), dtype=torch.long, device=feat_q.device))
 
         return loss
