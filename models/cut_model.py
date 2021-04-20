@@ -92,10 +92,10 @@ class CUTModel(BaseModel):
             self.optimizers.append(self.optimizer_D)
 
             # NSQUARED TIME
-            self.netA = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.normG, not opt.no_dropout,
+            self.netA = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, "resnet_attention", opt.normG, not opt.no_dropout,
                         opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids, opt)
             # change to opt.load_path
-            state_dict = torch.load("load_path", map_location=str(self.device))
+            state_dict = torch.load("checkpoints/attention_model/latest_net_D.pth", map_location=str(self.device))
             if hasattr(state_dict, '_metadata'):
                 del state_dict._metadata
             self.netA.load_state_dict(state_dict)
@@ -218,15 +218,19 @@ class CUTModel(BaseModel):
         
         # Add attention weighting
         with torch.no_grad():
-            # attention_output = self.netA(src, self.nce_layers, encode_only=True)
+            attention_output = self.netA(src, self.nce_layers, encode_only=True)
+            for i in range(len(attention_output)):
+                attention_output[i] = attention_output[i].pow(2).mean(1)
+            
             feat_a_pool = []
-            # for at_id, at_map in enumerate(attention_output):
-            #     at_map = at_map.permute(0, 2, 3, 1).flatten(1, 2)
-            #     patch_indices = sample_ids[at_id]
-            #     at_weights = at_map[:, patch_indices, :].flatten(0, 1)
-            #     feat_a_pool.append(at_weights) 
-            for feat in feat_q_pool:
-                feat_a_pool.append(feat[:, 0])
+            for at_id, at_map in enumerate(attention_output):
+                # print(at_map.shape)
+                at_map = at_map.flatten(1, 2)
+                patch_indices = sample_ids[at_id]
+                at_weights = at_map[:, patch_indices].flatten(0, 1)
+                feat_a_pool.append(at_weights) 
+            # for feat in feat_q_pool:
+            #     feat_a_pool.append(feat[:, 0])
 
         total_nce_loss = 0.0
         for f_q, f_k, f_a, crit, nce_layer in zip(feat_q_pool, feat_k_pool, feat_a_pool, self.criterionNCE, self.nce_layers):

@@ -13,10 +13,10 @@ from models.attention_model import AttentionModel
 from data.base_dataset import get_transform
 
 if __name__ == '__main__':
-    load_path = "checkpoints/summer2winter_CUT/latest_net_D.pth"
+    load_path = "checkpoints/attention_model/latest_net_D.pth"
     # img_path = "datasets/s2wy_test/testA/2010-09-07 12_23_20.jpg"
-    img_path = "datasets/s2wy_test/testA/2012-07-08 16_40_31.jpg"
-    # img_path = "datasets/s2wy_test/testB/2010-11-01 15_58_51.jpg"
+    # img_path = "datasets/s2wy_test/testA/2012-07-08 16_40_31.jpg"
+    img_path = "datasets/s2wy_test/testB/2010-11-01 15_58_51.jpg"
     with torch.cuda.device(0):
         img = Image.open(img_path)
     # plt.imshow(img)
@@ -31,6 +31,8 @@ if __name__ == '__main__':
     # net = networks.define_D(3, 64, "basic", 3, 'instance', 'xavier', 0.02, False, [0])
     # if isinstance(net, torch.nn.DataParallel):
     #     net = net.module
+    opt.netG = "resnet_attention"
+    opt.model = "attention"
     attention_model = AttentionModel(opt)
     state_dict = torch.load(load_path, map_location=str(device))
     if hasattr(state_dict, '_metadata'):
@@ -51,7 +53,7 @@ if __name__ == '__main__':
         image_map = torch.squeeze(image_map)
         print(image_map.shape)
         plt.imshow(image_map.cpu(), interpolation='bicubic')
-        plt.savefig("visualize_am2/attention_map_" + str(counter) + ".png")
+        plt.savefig("visualize_am/attention_map_" + str(counter) + ".png")
         counter += 1
     
         
