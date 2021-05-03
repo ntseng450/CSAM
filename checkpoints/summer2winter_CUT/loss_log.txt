@@ -4,3 +4,22 @@
 ================ Training Loss (Tue Apr 20 17:11:38 2021) ================
 ================ Training Loss (Tue Apr 20 17:12:06 2021) ================
 ================ Training Loss (Tue Apr 20 17:12:56 2021) ================
+================ Training Loss (Mon May  3 16:45:37 2021) ================
+================ Training Loss (Mon May  3 16:51:01 2021) ================
+================ Training Loss (Mon May  3 16:51:55 2021) ================
+================ Training Loss (Mon May  3 16:53:09 2021) ================
+================ Training Loss (Mon May  3 16:54:18 2021) ================
+================ Training Loss (Mon May  3 17:07:45 2021) ================
+================ Training Loss (Mon May  3 17:08:03 2021) ================
+================ Training Loss (Mon May  3 17:09:10 2021) ================
+================ Training Loss (Mon May  3 17:18:01 2021) ================
+================ Training Loss (Mon May  3 17:21:43 2021) ================
+================ Training Loss (Mon May  3 18:50:35 2021) ================
+(epoch: 1, iters: 100, time: 0.308, data: 5.323) G_GAN: 0.291 D_real: 0.301 D_fake: 0.231 G: 5.231 NCE: 4.960 NCE_Y: 4.920 
+(epoch: 1, iters: 200, time: 0.389, data: 0.000) G_GAN: 0.277 D_real: 0.275 D_fake: 0.193 G: 5.172 NCE: 4.917 NCE_Y: 4.874 
+(epoch: 1, iters: 300, time: 0.445, data: 0.001) G_GAN: 0.283 D_real: 0.241 D_fake: 0.275 G: 5.124 NCE: 4.831 NCE_Y: 4.851 
+(epoch: 1, iters: 400, time: 0.486, data: 0.001) G_GAN: 0.787 D_real: 0.292 D_fake: 0.661 G: 5.595 NCE: 4.788 NCE_Y: 4.830 
+(epoch: 1, iters: 500, time: 0.524, data: 0.001) G_GAN: 0.273 D_real: 0.529 D_fake: 0.186 G: 5.079 NCE: 4.822 NCE_Y: 4.790 
+(epoch: 1, iters: 600, time: 0.563, data: 0.001) G_GAN: 0.280 D_real: 0.271 D_fake: 0.237 G: 5.146 NCE: 4.899 NCE_Y: 4.834 
+================ Training Loss (Mon May  3 19:05:14 2021) ================
+(epoch: 1, iters: 100, time: 0.272, data: 4.068) G_GAN: 0.258 D_real: 0.282 D_fake: 0.236 G: 5.153 NCE: 4.920 NCE_Y: 4.870 

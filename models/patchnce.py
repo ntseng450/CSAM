@@ -7,8 +7,8 @@ class PatchNCELoss(nn.Module):
     def __init__(self, opt):
         super().__init__()
         self.opt = opt
-        # self.cross_entropy_loss = torch.nn.CrossEntropyLoss(reduction='none')
-        self.cross_entropy_loss = None
+        self.cross_entropy_loss = torch.nn.CrossEntropyLoss(reduction='none')
+        # self.cross_entropy_loss = None
         self.mask_dtype = torch.uint8 if version.parse(torch.__version__) < version.parse('1.2.0') else torch.bool
 
     def forward(self, feat_q, feat_k, feat_a):
@@ -58,7 +58,7 @@ class PatchNCELoss(nn.Module):
         # print(out[0, :])
         # print(torch.sum(out[0, :]))
         
-        self.cross_entropy_loss = torch.nn.CrossEntropyLoss(weight=feat_a.detach())
+        # self.cross_entropy_loss = torch.nn.CrossEntropyLoss(weight=feat_a.detach())
         loss = self.cross_entropy_loss(l_neg, torch.arange(npatches, dtype=torch.long, device=feat_q.device))
 
         # loss = self.cross_entropy_loss(out, torch.zeros(out.size(0), dtype=torch.long, device=feat_q.device))

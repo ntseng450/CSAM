@@ -223,19 +223,39 @@ class CUTModel(BaseModel):
                 attention_output[i] = attention_output[i].pow(2).mean(1)
             
             feat_a_pool = []
+
+            # normalization of attention
+            total_sum = 0
+            total_var = 0
+            total_count = 0
+            for at_id, at_map in enumerate(attention_output):
+                total_sum += torch.mean(at_map)
+                total_var += torch.square(torch.std(at_map))
+                total_count += 1
+                # print("id:", at_id, at_map)
+            total_sum /= total_count
+            total_std = torch.sqrt(total_var)
+            # print(total_sum)
+            # print(total_std)
+
             for at_id, at_map in enumerate(attention_output):
                 # print(at_map.shape)
                 at_map = at_map.flatten(1, 2)
                 patch_indices = sample_ids[at_id]
                 at_weights = at_map[:, patch_indices].flatten(0, 1)
+                at_weights = (at_weights - total_sum) / (3*total_std)
+                at_weights[at_weights < 0] = 0
+                # print("at_id:", at_id, "weight: ", at_weights)
                 feat_a_pool.append(at_weights) 
+
             # for feat in feat_q_pool:
             #     feat_a_pool.append(feat[:, 0])
 
         total_nce_loss = 0.0
         for f_q, f_k, f_a, crit, nce_layer in zip(feat_q_pool, feat_k_pool, feat_a_pool, self.criterionNCE, self.nce_layers):
             loss = crit(f_q, f_k, f_a) * self.opt.lambda_NCE
-            total_nce_loss += loss
+            # total_nce_loss += loss
+            total_nce_loss += loss.mean()
 
         return total_nce_loss / n_layers
 
