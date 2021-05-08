@@ -241,15 +241,15 @@ class CUTModel(BaseModel):
             for at_id, at_map in enumerate(attention_output):
                 # print(at_map.shape)
                 # per-map normalization
-                at_mean = torch.mean(at_map)
-                at_std = torch.std(at_map)
+                # at_mean = torch.mean(at_map)
+                # at_std = torch.std(at_map)
 
                 at_map = at_map.flatten(1, 2)
                 patch_indices = sample_ids[at_id]
                 at_weights = at_map[:, patch_indices].flatten(0, 1)
                 # at_weights = ((at_weights - total_sum) / (3*total_std)) + 1
-                at_weights = ((at_weights - at_mean) / (3*at_std)) + 1
-                at_weights[at_weights < 0] = 0
+                # at_weights = ((at_weights - at_mean) / (3*at_std)) + 1
+                # at_weights[at_weights < 0] = 0
                 # print("at_id:", at_id, "weight: ", at_weights)
                 feat_a_pool.append(at_weights) 
 
