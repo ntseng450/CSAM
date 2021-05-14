@@ -95,7 +95,8 @@ class CUTModel(BaseModel):
             self.netA = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, "resnet_attention", opt.normG, not opt.no_dropout,
                         opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids, opt)
             # change to opt.load_path
-            state_dict = torch.load("checkpoints/attention_model/latest_net_D.pth", map_location=str(self.device))
+            attention_path = "checkpoints/" + opt.am_path + "/latest_net_D.pth"
+            state_dict = torch.load(attention_path, map_location=str(self.device))
             if hasattr(state_dict, '_metadata'):
                 del state_dict._metadata
             self.netA.load_state_dict(state_dict)
@@ -225,16 +226,16 @@ class CUTModel(BaseModel):
             feat_a_pool = []
 
             # normalization of attention
-            # total_sum = 0
-            # total_var = 0
-            # total_count = 0
-            # for at_id, at_map in enumerate(attention_output):
-            #     total_sum += torch.mean(at_map)
-            #     total_var += torch.square(torch.std(at_map))
-            #     total_count += 1
-            #     # print("id:", at_id, at_map)
-            # total_sum /= total_count
-            # total_std = torch.sqrt(total_var)
+            total_sum = 0
+            total_var = 0
+            total_count = 0
+            for at_id, at_map in enumerate(attention_output):
+                total_sum += torch.mean(at_map)
+                total_var += torch.square(torch.std(at_map))
+                total_count += 1
+                # print("id:", at_id, at_map)
+            total_sum /= total_count
+            total_std = torch.sqrt(total_var)
             # print(total_sum)
             # print(total_std)
 
@@ -247,14 +248,11 @@ class CUTModel(BaseModel):
                 at_map = at_map.flatten(1, 2)
                 patch_indices = sample_ids[at_id]
                 at_weights = at_map[:, patch_indices].flatten(0, 1)
-                # at_weights = ((at_weights - total_sum) / (3*total_std)) + 1
+                at_weights = ((at_weights - total_sum) / (3*total_std)) + 1
                 # at_weights = ((at_weights - at_mean) / (3*at_std)) + 1
-                # at_weights[at_weights < 0] = 0
+                at_weights[at_weights < 0] = 0
                 # print("at_id:", at_id, "weight: ", at_weights)
-                feat_a_pool.append(at_weights) 
-
-            # for feat in feat_q_pool:
-            #     feat_a_pool.append(feat[:, 0])
+                feat_a_pool.append(at_weights)
 
         total_nce_loss = 0.0
         for f_q, f_k, f_a, crit, nce_layer in zip(feat_q_pool, feat_k_pool, feat_a_pool, self.criterionNCE, self.nce_layers):
