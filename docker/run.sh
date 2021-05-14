@@ -12,6 +12,7 @@ docker run -it --rm \
     --gpus '"device='$GPU'"' \
     --name 'csam' \
     --hostname $(hostname) \
+    --mount type=bind,source="/mnt/workspace/datasets/CUT_Eval",target=/app \
     -u $(id -u):$(id -g) \
     -e HOME \
     -v /etc/timezone:/etc/timezone:ro \

@@ -1,3 +1,0 @@
-================ Training Loss (Mon May  3 23:20:19 2021) ================
-(epoch: 1, iters: 100, time: 0.165, data: 0.069) G_GAN: 0.232 D_real: 0.391 D_fake: 0.177 G: 5.103 NCE: 4.879 NCE_Y: 4.864 
-(epoch: 1, iters: 200, time: 0.195, data: 0.001) G_GAN: 0.284 D_real: 0.252 D_fake: 0.283 G: 5.188 NCE: 4.940 NCE_Y: 4.869 
